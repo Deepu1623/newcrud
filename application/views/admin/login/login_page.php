@@ -109,11 +109,9 @@
             <input type="submit" value="Login">
         </form>
         <div class="form-footer">
-            Don't have an account? <a href="<?php echo base_url('/index.php/User/registration') ?>">Register here</a>
+            Don't have an account? <a href="<?php echo base_url('User/registration') ?>">Register here</a>
     </div>
 
-    <script src="<?= base_url() ?>assets/js/plugins/jquery-3.7.0.min.js"></script>
-    <script src="<?= base_url() ?>assets/js/plugins/sweetalert2.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#loginForm').on('submit', function(event) {
@@ -121,7 +119,6 @@
 
                 const userID = $('#userID').val();
                 const password = $('#password').val();
-                const base_url = "<?= base_url(); ?>";
 
                 $.ajax({
                     url: base_url + 'index.php/User/login',

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gym Registration Form</title>
+     <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/sweetalert2.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -105,73 +106,12 @@
             <input type="submit" value="Register">
         </form>
         <div class="form-footer">
-            Already have an account? <a href="<?php echo base_url('/index.php/User/loginpage') ?>">Login here</a>
+            Already have an account? <a href="<?php echo base_url('User/loginpage') ?>">Login here</a>
         </div>
     </div>
+    
 
-    <script>
-        $(document).ready(function() {
-            $('#registrationForm').on('submit', function(event) {
-                event.preventDefault(); // Prevent the default form submission
-
-                const name = $('#name').val();
-                const phone = $('#phone').val();
-                const email = $('#email').val();
-                const userID = $('#userID').val();
-                const password = $('#password').val();
-                 const base_url = "<?= base_url(); ?>";
-                
-                $.ajax({
-                    url: base_url + 'index.php/User/register',
-                    type: 'POST',
-                    data: {
-                        name: name,
-                        phone: phone,
-                        userID: userID,
-                        password: password,
-                        email: email
-
-                    },
-                    success: function(response) {
-                        if (response.trim() == 'success') {
-                            Swal.fire({
-                                    title: 'Success!',
-                                    text: 'User registration successfully completed.',
-                                    icon: 'success',
-                                    confirmButtonText: 'OK'
-                                })
-                                .then(() => {
-                                    // Redirect to the login page after the user clicks 'OK'
-                                    window.location.href = base_url +'index.php/User/loginpage';
-                                });
-                        } else if (response.trim() == 'exists') {
-                            Swal.fire({
-                                title: 'Error!',
-                                text: 'User ID already exists. Please try a new ID.',
-                                icon: 'error',
-                                confirmButtonText: 'OK'
-                            });
-                        } else {
-                            Swal.fire({
-                                title: 'Error!',
-                                text: 'Registration failed. Please try again.',
-                                icon: 'error',
-                                confirmButtonText: 'OK'
-                            });
-                        }
-                    },
-                    error: function(xhr) {
-                        Swal.fire({
-                            title: 'Error!',
-                            text: 'Registration failed: ' + xhr.responseText,
-                            icon: 'error',
-                            confirmButtonText: 'OK'
-                        });
-                    }
-                });
-            });
-        });
-    </script>
+   
 </body>
 
 </html>

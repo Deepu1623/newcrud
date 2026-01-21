@@ -377,7 +377,6 @@ class User extends MY_Controller
         $user_id = $this->session->userdata('userID');
         $year = $this->session->userdata('session');
         $current_date = date('Y-m-d');
-
         if ($admission_id) {
             // Get current student data
             $this->db->where('admission_id', $admission_id);

@@ -25,7 +25,7 @@ $(document).on("click", ".toggle-status-btn", function () {
 						Swal.fire(
 							"Updated!",
 							"Student status has been changed.",
-							"success"
+							"success",
 						).then(() => {
 							// Reload the page after user closes alert
 							location.reload();
@@ -147,7 +147,7 @@ $(document).ready(function () {
 								() => {
 									window.location.href =
 										base_url + "index.php/User/student_report";
-								}
+								},
 							);
 						} else if (response.trim() == "exists") {
 							Swal.fire({
@@ -219,6 +219,75 @@ $(document).ready(function () {
 	// Make sure this event is inside the same block where 'table' is defined
 	$("#filter-name, #filter-admission-id").on("change", function () {
 		table.ajax.reload();
+	});
+
+	$("#registrationForm").on("submit", function (event) {
+		event.preventDefault(); // Prevent the default form submission
+
+		const name = $("#name").val();
+		const phone = $("#phone").val();
+		const email = $("#email").val();
+		const userID = $("#userID").val();
+		const password = $("#password").val();
+
+		Swal.fire({
+			title: "Are you sure?",
+			text: "Do you want to regiterd?",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Yes, Update it!",
+		}).then((result) => {
+			if (result.isConfirmed) {
+				$.ajax({
+					url: base_url + "User/register",
+					type: "POST",
+					data: {
+						name: name,
+						phone: phone,
+						userID: userID,
+						password: password,
+						email: email,
+					},
+					success: function (response) {
+						if (response.trim() == "success") {
+							Swal.fire({
+								title: "Success!",
+								text: "User registration successfully completed.",
+								icon: "success",
+								confirmButtonText: "OK",
+							}).then(() => {
+								// Redirect to the login page after the user clicks 'OK'
+								window.location.href = base_url + "index.php/User/loginpage";
+							});
+						} else if (response.trim() == "exists") {
+							Swal.fire({
+								title: "Error!",
+								text: "User ID already exists. Please try a new ID.",
+								icon: "error",
+								confirmButtonText: "OK",
+							});
+						} else {
+							Swal.fire({
+								title: "Error!",
+								text: "Registration failed. Please try again.",
+								icon: "error",
+								confirmButtonText: "OK",
+							});
+						}
+					},
+					error: function (xhr) {
+						Swal.fire({
+							title: "Error!",
+							text: "Registration failed: " + xhr.responseText,
+							icon: "error",
+							confirmButtonText: "OK",
+						});
+					},
+				});
+			}
+		});
 	});
 
 	//doucument ends here
