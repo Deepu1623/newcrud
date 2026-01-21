@@ -1,0 +1,250 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    font-family: "Nunito Sans", sans-serif;
+    display: flex;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.header {
+    position: fixed;
+    width: 100%;
+    height: 60px;
+    background-color: #0093dd;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.menu-icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: none;
+}
+
+.nav a {
+    color: #0093dd;
+    text-decoration: none;
+    margin-left: 20px;
+    border: 1px solid white;
+    border-radius: 8px;
+    padding: 6px 12px;
+    background-color: white;
+    font-weight: 600;
+}
+
+.nav a:hover {
+    background-color: #0093dd;
+    color: white;
+    transition: 0.3s;
+}
+
+.sidebar {
+    width: 220px;
+    background-color: #333;
+    color: #fff;
+    padding-top: 60px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+    /* z-index: 9999; */
+}
+
+.sidebar ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.sidebar ul li a {
+    display: block;
+    padding: 15px 20px;
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid #444;
+}
+
+.sidebar ul li a:hover {
+    background-color: #444;
+}
+
+.sidebar .submenu {
+    display: none;
+    background-color: #2a2a2a;
+    padding-left: 20px;
+}
+
+.sidebar .submenu li a {
+    padding: 10px 30px;
+    font-size: 14px;
+}
+
+.sidebar .submenu li a:hover {
+    background-color: #3a3a3a;
+}
+
+.sidebar .dropdown-toggle::after {
+    content: '▸';
+    float: right;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.sidebar .open>.dropdown-toggle::after {
+    transform: rotate(90deg);
+}
+
+
+/* Dropdown arrow icon */
+.sidebar .dropdown-toggle::after {
+    content: '▸';
+    float: right;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+/* Rotate arrow when open */
+.sidebar .open>.dropdown-toggle::after {
+    transform: rotate(90deg);
+}
+
+.content {
+    margin-left: 220px;
+    padding: 80px 20px;
+    flex: 1;
+    position: relative;
+    z-index: 1;
+}
+
+/* Login Form Styles */
+.login-container {
+    width: 350px;
+    padding: 40px;
+    background-color: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    color: #fff;
+}
+
+.login-form h2 {
+    margin-bottom: 20px;
+    font-size: 26px;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #ddd;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #333;
+    color: #fff;
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #390fdd;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #19e679;
+}
+
+#delete_btn {
+    width: 100%;
+    max-width: 200px;
+    padding: 10px 20px;
+    background-color: #e91325;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+#delete_btn:hover {
+    background-color: #c2101f;
+}
+
+#delete_btn:active {
+    transform: scale(0.98);
+}
+
+.forgot-password {
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 12px;
+    color: #ff5722;
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Sidebar */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        z-index: 9999;
+
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .content {
+        margin-left: 0;
+    }
+
+    .menu-icon {
+        display: block;
+    }
+
+    .nav {
+        display: none;
+    }
+}
